@@ -30,7 +30,7 @@ getAuth().onAuthStateChanged(function(user) {
                     "Your account is not verified, \n please contact server owner to get your account verified.",
                     "error"
                 )
-                LOGOUT();
+                signOut(auth).then(() => {}).catch((error) => {});
                 return;
             }
 
@@ -65,5 +65,3 @@ export function LOGIN(){
 export function LOGOUT(){
     signOut(auth).then(() => {}).catch((error) => {});
 }
-
-window.LOGOUT = LOGOUT;
