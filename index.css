@@ -1,0 +1,97 @@
+body {
+    background-color: rgb(17, 19, 20) !important;
+    color: white;
+    padding: 0px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+}
+
+input,
+button {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+}
+
+#navbar {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 9vh;
+    box-shadow: 1px 8px 27px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 1px 8px 27px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 8px 27px -16px rgba(0, 0, 0, 0.75);
+    align-items: center;
+}
+
+.main-div {
+    width: 20%;
+    margin: 0px auto;
+    padding: 20px;
+    display: none;
+}
+
+.loggedin-div {
+    margin: 0px auto;
+    padding: 20px;
+    display: none;
+}
+
+.main-div button,
+.loggedin-div button,
+#navbar button {
+    background: rgb(3, 46, 140);
+    color: #fff;
+    border: 1px solid rgb(3, 46, 140);
+    border-radius: 5px;
+    padding: 15px;
+    display: block;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+}
+
+.main-div button:hover,
+.loggedin-div button:hover,
+#navbar button:hover {
+    background: none;
+    color: #5d8ffc;
+    border: 1px solid rgb(3, 46, 140);
+    cursor: pointer;
+}
+
+a {
+    color: #5d8ffc;
+    text-decoration: none;
+}
+
+#loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+#navbar_1 {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: #3d3d3d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(91, 91, 91);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6e6d6d;
+}
