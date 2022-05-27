@@ -95,3 +95,67 @@ a {
 ::-webkit-scrollbar-thumb:hover {
     background: #6e6d6d;
 }
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.like {
+    background: rgb(255, 50, 57) !important;
+    color: #fff;
+    width: 70px;
+    border: 1px solid rgb(255, 50, 57) !important;
+    border-radius: 5px;
+    padding: 13px !important;
+    display: block;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+}
+
+.like:hover {
+    background: none !important;
+    color: rgb(252, 93, 106) !important;
+    border: 1px solid rgb(255, 50, 57);
+    cursor: pointer;
+}
+
+.description {
+    font-size: 1em;
+    color: rgb(145, 144, 144);
+}
+
+.end {
+    border: 1px solid rgb(88, 87, 87);
+    border-radius: 3px;
+}
+
+.TASK {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start !important;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 40% !important;
+}
+
+.swal-modal,
+.swalTasksModal {
+    background-color: rgb(24, 26, 27) !important;
+}
+
+.swal-text,
+.swalTasksModal {
+    color: rgba(232, 230, 227, 0.65) !important;
+}
+
+.swal-modal button {
+    background-color: rgb(6, 88, 127) !important;
+}
+
+.swal-title {
+    color: rgba(232, 230, 227, 0.65) !important;
+}
