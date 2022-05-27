@@ -1,88 +1,124 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
-import {LOGIN, LOGOUT} from "./authentication.js"
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { LOGIN, LOGOUT } from "./authentication.js";
 
 var config = {
-	apiKey: "AIzaSyCdzbcpM_Oe3NQgBmpJcJJq1cs0z5VFWYc",
-  	authDomain: "fir-web-login-906b6.firebaseapp.com",
-  	projectId: "fir-web-login-906b6",
-  	storageBucket: "fir-web-login-906b6.appspot.com",
-  	messagingSenderId: "1014146452701",
-  	appId: "1:1014146452701:web:39150ab67e871555db1f34",
-  	measurementId: "G-X24EJNJLQV"
+    apiKey: "AIzaSyCdzbcpM_Oe3NQgBmpJcJJq1cs0z5VFWYc",
+    authDomain: "fir-web-login-906b6.firebaseapp.com",
+    projectId: "fir-web-login-906b6",
+    storageBucket: "fir-web-login-906b6.appspot.com",
+    messagingSenderId: "1014146452701",
+    appId: "1:1014146452701:web:39150ab67e871555db1f34",
+    measurementId: "G-X24EJNJLQV",
 };
 
 firebase.initializeApp(config);
 const app = initializeApp(config);
 export const db = getFirestore(app);
 
+function like() {
+    swal("You Liked the Lecture", "Aww Yiss! Thanks for liking the lecture! \n\n Liking lectures motivates us to bring up\n such content for all of you!", "love.png");
+}
+
 export async function getvideos(db) {
+    const usersCol = collection(db, "collection");
+    const userSnapshot = await getDocs(usersCol);
+    const objects = userSnapshot.docs.map((doc) => doc.data());
+    const n = objects.length;
 
-  	const usersCol = collection(db, 'collection');
-  	const userSnapshot = await getDocs(usersCol);
-  	const objects = userSnapshot.docs.map(doc => doc.data());
-	const n = objects.length;
-  	
-	for(var i = 0; i < n; i++){
-	
-		const object = objects[i];
-	
-		if(Object.keys(object).length === 0){
-			continue;
-		}
+    for (var i = 0; i < n; i++) {
+        const object = objects[i];
 
-		const name = object["name"];
-		const link = object["link"];
-		const description = object["description"];
-		const slides = object["slides"]
+        if (Object.keys(object).length === 0) {
+            continue;
+        }
 
-		document.querySelector("#user_div").insertAdjacentHTML('afterbegin', `
-		<div style="width: 70%;">
+        const name = object["name"];
+        const link = object["link"];
+        const description = object["description"];
+        const slides = object["slides"];
 
-			<span style="display:flex; justify-content: space-between;">
-				<h3>${name}</h3>
-				<h3><a href="${slides}" target = "blank">Class Slides</a></h3>
+        document.querySelector("#user_div").insertAdjacentHTML(
+            "afterbegin",
+            `
+			<div style="width:70%">
+				<video controls width = "100%" height="500" poster="banner1.png" style="object-fit: cover;" controlsList="nodownload">
+					<source src="${link}"/>
+				</video>
+				<span class="title">
+					<span style="width:50%;">
+						<h3>${name}</h3>
+					</span>
+					<button class="like" id = "liked" onclick="like()">Like</button>
+				</span>
+
+				<span style="width: 70%;" class="description">
+					<p>${description}</p>
+					<h4>View class slides <a href = "${slides}">here</a>.</h4>
+				</span>
+			</div>
+			<hr class="end">
+		`
+        );
+    }
+    document.getElementById("loading").style.display = "none";
+}
+
+export async function exists(userid) {
+    const usersCol = collection(db, "users");
+    const userSnapshot = await getDocs(usersCol);
+    const objects = userSnapshot.docs.map((doc) => doc.data());
+    const n = objects.length;
+    var found = false;
+
+    for (var i = 0; i < n; i++) {
+        if (objects[i].email == userid) {
+            found = true;
+            break;
+        }
+    }
+
+    return await found;
+}
+
+async function viewDailyTasks() {
+    const div = document.createElement("span");
+    div.className = "TASK";
+    const usersCol = collection(db, "dailytasks");
+    const userSnapshot = await getDocs(usersCol);
+    const objects = userSnapshot.docs.map((doc) => doc.data());
+    const n = objects.length;
+    for (var i = 0; i < n; i++) {
+        const object = objects[i];
+        if (Object.keys(object).length === 0) {
+            continue;
+        }
+        div.insertAdjacentHTML(
+            "afterbegin",
+            `
+			<span style="margin:0 !important">
+				<h3>${object.date} - <a href = "${object.task}" target = "blank">Problem</a></h3>
 			</span>
-
-			<p id = "description">${description}</p>
-
-			<hr style="color: white;">
-
-			<video style="border-radius: 5px;object-fit: cover;" width="100%" height="500" controls controlsList="nodownload" poster = "banner1.png">
-				<source src="${link}" type="video/mp4">
-				Your browser does not support the video tag.
-			</video>		
-
-			<br> <br>
-			
-		</div>
-		`);
-	}
-	document.getElementById("loading").style.display = "none"
+		`
+        );
+    }
+    swal({
+        title: "Daily Tasks",
+        content: div,
+        className: "swalTasksModal",
+    });
 }
 
-export async function exists(userid){
-
-	const usersCol = collection(db, 'users');
-	const userSnapshot = await getDocs(usersCol);
-	const objects = userSnapshot.docs.map(doc => doc.data());
-	const n = objects.length;
-	var found = false;
-	
-	for(var i = 0; i < n;i++){
-		if(objects[i].email == userid){
-			found = true;
-			break;
-		}
-	}
-	
-	return await found;
+function login() {
+    LOGIN();
 }
-
-function login(){ LOGIN(); }
-function logout(){ LOGOUT() }
+function logout() {
+    LOGOUT();
+}
 
 window.logout = logout;
 window.login = login;
+window.viewDailyTasks = viewDailyTasks;
+window.like = like;
 
-document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener("contextmenu", (event) => event.preventDefault());
