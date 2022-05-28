@@ -18,7 +18,7 @@ const provider = new GoogleAuthProvider(app);
 
 getAuth().onAuthStateChanged(function (user) {
     if (user) {
-        document.getElementById("login_div").style.display = "block";
+        document.getElementById("login_div").style.display = "none";
 
         (async () => {
             const find = await exists(user.email);
@@ -29,6 +29,7 @@ getAuth().onAuthStateChanged(function (user) {
                     .catch((error) => {});
                 return;
             } else {
+                document.title = "TLE Eliminators - Level 1"
                 swal("Successfully Logged In", `Welcome ${user.displayName} !`, "success.png");
                 document.getElementById("navbar_1").style.display = "block";
                 document.getElementById("user_div").style.display = "block";
