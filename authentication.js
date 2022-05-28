@@ -30,7 +30,7 @@ getAuth().onAuthStateChanged(function (user) {
                 return;
             } else {
                 document.title = "TLE Eliminators - Level 1"
-                swal("Successfully Logged In", `Welcome ${user.displayName} !`, "success.png");
+                swal("", `Welcome ${user.displayName} !`, "success.png");
                 document.getElementById("navbar_1").style.display = "block";
                 document.getElementById("user_div").style.display = "block";
                 document.getElementById("login_div").style.display = "none";
