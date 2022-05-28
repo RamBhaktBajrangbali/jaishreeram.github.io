@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>TLE Eliminators - Level 1</title>
+        <title>TLE Eliminators</title>
 
         <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet" />
         <link rel="stylesheet" href="index.css" />
@@ -8,6 +8,7 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
     </head>
 
     <body>
@@ -17,9 +18,13 @@
                     <img src="LOGO_SMALL.png" height="40px" style="margin-right: 3px;" />
                     <h2>TLE Eliminators</h2>
                 </span>
-                <button onclick="login()" style="width: 8em;">Sign up</button>
+                <span class="cont" style="width: 20%;">
+                    <a href = "#contactus">Contact us</a>
+                    <a onclick="login()" style="cursor: pointer;">Sign up</a>
+                    <a href = "https://memboro.com/priyansh31dec" target="_blank">Register</a>
+                    
+                </span>
             </span>
-
             <br />
             <br />
 
@@ -51,18 +56,52 @@
                 </span>
             </span>
 
-            <br />
-            <br />
-            <br />
-            <br />
+
+            <span class="info home1" id = "contactus">
+
+                <h1><a>Let's get in touch !</a></h1>
+                <input type="text" required placeholder="* Your Name..." id = "sendername"/>
+                <input type="email" required placeholder="* Your Email..." id = "senderemail"/>
+                <input type="text" required placeholder="* Subject..." id = "sendersubject">
+                <textarea required placeholder="* Your Message..." id = "sendermessage"></textarea>
+
+                <button style="width: 50%" onclick="sendMessage()">Submit</button>
+            </span>
+
+            <br>
+
+            <span class="info" style="flex-direction:row;">
+                <a href="https://www.linkedin.com/company/tle-eliminators?originalSubdomain=in" target="_blank">
+                    <img src="linkedin.png" class="IMG"/>
+                </a>
+                <a href = "https://www.instagram.com/priyansh31dec/" target="_blank">
+                    <img src="instagram.png" class="IMG"/>
+                </a>
+                <a href = "https://twitter.com/Priyansh_31Dec" target="_blank">
+                    <img src="twitter.png" class="IMG"/> 
+                </a>
+                <a href = "https://discord.gg/dAtzHzycAa" target="_blank">
+                    <img src="discord.png" class="IMG"/>
+                </a>
+            </span>
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+
         </div>
 
         <span id="navbar_1">
             <span id="navbar">
-                <h2>TLE Eliminators <a>Level 1</a></h2>
-                <span style="display: flex; justify-content: space-between; align-items: center;">
-                    <button style="margin-right: 5px;" onclick="viewDailyTasks()">Daily Tasks</button>
-                    <button onclick="logout()">Logout</button>
+                <span class="cont">
+                    <img src="LOGO_SMALL.png" height="40px" style="margin-right: 3px;" />
+                    <h2>TLE Eliminators <a>Level 1</a></h2>
+                </span>
+                <span style="display: flex; justify-content: space-between; align-items: center; width: 13%;">
+                    <a onclick="viewDailyTasks()" style="cursor: pointer;">Daily Tasks</a>
+                    <a onclick="logout()" style="cursor: pointer;">Logout</a>
                 </span>
             </span>
         </span>
