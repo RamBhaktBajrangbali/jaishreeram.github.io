@@ -109,6 +109,35 @@ async function viewDailyTasks() {
     });
 }
 
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+};
+
+function sendMessage(){
+    const name = document.getElementById("sendername").value;
+    const email = document.getElementById("senderemail").value;
+    const message = document.getElementById("sendermessage").value;
+    const subject = document.getElementById("sendersubject").value;
+
+    if((name.length === 0) || (email.length ===0 ) || (message.length === 0) || (subject.length === 0)){
+        swal("Message not sent", "Please fill out the whole form.", "error.png");
+        return;
+    }
+
+    if(validateEmail(email) === false){
+        swal("Message not sent", "Your Entered Email address is invalid.", "error.png");
+        return;
+    }
+
+    //window.open(`mailto:kabraji001@gmail.com?subject=${subject}&body=${message}`);
+   
+
+}
+
 function login() {
     LOGIN();
 }
@@ -120,5 +149,6 @@ window.logout = logout;
 window.login = login;
 window.viewDailyTasks = viewDailyTasks;
 window.like = like;
+window.sendMessage = sendMessage
 
 document.addEventListener("contextmenu", (event) => event.preventDefault());
