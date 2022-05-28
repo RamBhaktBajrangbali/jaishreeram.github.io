@@ -10,6 +10,10 @@ body {
     font-size: 16px;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 input,
 button {
     font-family: "Nunito", sans-serif;
@@ -18,7 +22,7 @@ button {
 
 .cont{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -135,6 +139,34 @@ a {
     -moz-transition: 0.3s;
 }
 
+input, textarea{
+    font-family: monospace;
+    display: block;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 5px;
+    background: rgb(23, 25, 26);
+    padding: 15px;
+    outline: none;
+    width: 60%;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+}
+
+input:focus, textarea:focus{
+    border: 1px solid rgb(161, 202, 214);
+    box-shadow: 1px 1px 14px 0px rgba(31,132,255,0.75);
+    -webkit-box-shadow: 1px 1px 14px 0px rgba(31,132,255,0.75);
+    -moz-box-shadow: 1px 1px 14px 0px rgba(31,132,255,0.75);
+}
+
+textarea{
+    resize: none;
+    height: 100px !important;
+}
+
 .like:hover {
     background: none !important;
     color: rgb(252, 93, 106) !important;
@@ -189,8 +221,23 @@ a {
     -webkit-box-shadow: 6px 2px 23px 0px rgba(31,132,255,0.47);
     -moz-box-shadow: 6px 2px 23px 0px rgba(31,132,255,0.47);
     border-radius: 10px;
+    transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+}
+
+.story:hover{
+    width: 41%;
 }
 
 .home1{
     margin-top: 8em;
+}
+
+.IMG{
+    margin-right: 5px;
+}
+
+.IMG:hover{
+    cursor: pointer;
 }
