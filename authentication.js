@@ -23,14 +23,14 @@ getAuth().onAuthStateChanged(function (user) {
         (async () => {
             const find = await exists(user.email);
             if (find === false) {
-                swal("Authenticaion Failure", "Your account is not verified, \n please contact server owner to get your account verified.", "warning.png");
+                swal("Authentication Failed", "Your account is not verified, \nPlease contact the server owner to get your account verified.", "warning.png");
                 signOut(auth)
                     .then(() => {})
                     .catch((error) => {});
                 return;
             } else {
                 document.title = "TLE Eliminators - Level 1"
-                swal("", `Welcome ${user.displayName} !`, "success.png");
+                swal("", `Welcome, ${user.displayName}`, "success.png");
                 document.getElementById("navbar_1").style.display = "block";
                 document.getElementById("user_div").style.display = "block";
                 document.getElementById("login_div").style.display = "none";
