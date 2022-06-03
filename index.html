@@ -8,7 +8,21 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6299bc1ab0d10b6f3e75790a/1g4k8dit2';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+            })();
+        </script>
+    <!--End of Tawk.to Script-->
     </head>
 
     <body>
@@ -56,17 +70,16 @@
                 </span>
             </span>
 
-
-            <span class="info home1" id = "contactus">
+            <form class="info home1" id = "contactus" onsubmit="sendMessage()">
 
                 <h1><a>Let's get in touch !</a></h1>
-                <input type="text" required placeholder="* Your Name..." id = "sendername"/>
+                <input type="text" required placeholder="* Full Name..." id = "sendername"/>
                 <input type="email" required placeholder="* Your Email..." id = "senderemail"/>
                 <input type="text" required placeholder="* Subject..." id = "sendersubject">
                 <textarea required placeholder="* Your Message..." id = "sendermessage"></textarea>
 
-                <button style="width: 50%" onclick="sendMessage()">Submit</button>
-            </span>
+                <button style="width: 50%" type="submit">Submit</button>
+            </form>
 
             <br>
 
