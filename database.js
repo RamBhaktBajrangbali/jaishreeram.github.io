@@ -43,7 +43,7 @@ export async function getvideos(db) {
             "afterbegin",
             `
             <div>
-				<video controls width = "100%" height="500" poster="banner.png" style="object-fit: cover;" controlsList="nodownload">
+				<video controls width = "100%" height="700" poster="banner.png" style="object-fit: cover;" controlsList="nodownload">
 					<source src="${link}"/>
 				</video>
 				<span class="title">
