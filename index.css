@@ -65,7 +65,8 @@ button {
 
 .main-div button,
 .loggedin-div button,
-#navbar button {
+#navbar button,
+.payment button {
     background: rgb(3, 46, 140);
     color: #fff;
     border: 1px solid rgb(3, 46, 140);
@@ -79,7 +80,8 @@ button {
 
 .main-div button:hover,
 .loggedin-div button:hover,
-#navbar button:hover {
+#navbar button:hover,
+.payment button:hover {
     background: none;
     color: #5d8ffc;
     border: 1px solid rgb(3, 46, 140);
@@ -155,7 +157,7 @@ input, textarea{
     -moz-transition: 0.3s;
 }
 
-input:focus, textarea:focus{
+input[type=text]:focus, textarea:focus{
     border: 1px solid rgb(161, 202, 214);
     box-shadow: 1px 1px 14px 0px rgba(31,132,255,0.75);
     -webkit-box-shadow: 1px 1px 14px 0px rgba(31,132,255,0.75);
@@ -233,4 +235,11 @@ textarea{
 
 .IMG:hover{
     cursor: pointer;
+}
+
+.payment{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
 }
