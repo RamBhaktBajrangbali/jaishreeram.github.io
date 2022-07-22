@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+
 import { LOGIN, LOGOUT } from "./authentication.js";
 
 var config = {
@@ -15,6 +16,7 @@ var config = {
 firebase.initializeApp(config);
 const app = initializeApp(config);
 export const db = getFirestore(app);
+const usrs = collection(db, "users");
 emailjs.init("YsZMJVNHGMAf25deJ");
 
 function like() {
@@ -132,6 +134,52 @@ function sendMessage(){
     })
 }
 
+function payment(){
+    const discord = document.getElementById("pay_dis").value;
+    const email = document.getElementById("pay_email").value;
+    var price = 0;
+
+    const batch1 = document.getElementById("batch1").checked
+    const batch2 = document.getElementById("batch2").checked
+    const batch3 = document.getElementById("batch3").checked
+
+    if(batch1)price++;
+    if(batch2)price++;
+    if(batch3)price++;
+
+    console.log(discord)
+    console.log(email)
+    console.log(price)
+    var options = {
+        "key":"rzp_test_ZHpFbfhR3rcJD8",
+        "amount":price * 100,
+        "currency":"INR",
+        "name": "TLE Eliminators",
+        "description":"Priyansh bhaiya orz",
+        "handler": function (response){
+            if(typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1){
+                swal("Transaction failed", "Please try again.", "error.png")
+            }
+            else{
+                swal("Transaction successful", "", "success.png")
+            }
+        },
+        "prefill": {
+            "name": "example",
+            "email" : "example@example.com",
+            "contact":+919900000000
+        },
+        "notes": {
+            "address" : "note value"
+        },
+        "theme": {
+            "color": "#040273"
+        }
+    }
+    var pay = new Razorpay(options)
+    pay.open()
+}
+
 function login() {
     LOGIN();
 }
@@ -147,5 +195,6 @@ window.login = login;
 window.viewDailyTasks = viewDailyTasks;
 window.like = like;
 window.sendMessage = sendMessage
+window.payment = payment
 
 document.addEventListener("contextmenu", (event) => event.preventDefault());
