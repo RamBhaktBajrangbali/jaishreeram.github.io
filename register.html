@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TLE Eliminators</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet" />
+        <link rel="stylesheet" href="index.css" />
+        <link rel="icon" href="logo.jpg" type="image/x-icon" />
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script>
+            function payment(){
+                const discord = document.getElementById("pay_dis").value;
+                const email = document.getElementById("pay_email").value;
+                var price = 0;
+
+                const batch1 = document.getElementById("batch1").checked
+                const batch2 = document.getElementById("batch2").checked
+                const batch3 = document.getElementById("batch3").checked
+
+                if(batch1)price++;
+                if(batch2)price++;
+                if(batch3)price++;
+
+                console.log(discord)
+                console.log(email)
+                console.log(price)
+                var options = {
+                    "key":"rzp_test_ZHpFbfhR3rcJD8",
+                    "amount":price * 100,
+                    "currency":"INR",
+                    "name": "TLE Eliminators",
+                    "description":"Priyansh bhaiya orz",
+                    "handler": function (response){
+                        if(typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1){
+                            swal("Transaction failed", "Please try again.", "error.png")
+                        }
+                        else{
+                            swal("Transaction successful", "", "success.png")
+                        }
+                    },
+                    "prefill": {
+                        "name": "example",
+                        "email" : "example@example.com",
+                        "contact":+919900000000
+                    },
+                    "notes": {
+                        "address" : "note value"
+                    },
+                    "theme": {
+                        "color": "#040273"
+                    }
+                }
+                var pay = new Razorpay(options)
+                pay.open()
+            }
+        </script>
+        
+    </head>
+<body>
+
+    <div style="display:flex;justify-content: center;align-items: center;width: 100%;height: 100vh;">
+        <div class="payment">
+            <h3>Email Address:</h3>
+            <input type = "text" id = "pay_email" required placeholder="johnny@example.com"/>
+            <h3>Discord Username:</h3>
+            <input required type="text" id = "pay_dis" placeholder="example#0213"/>
+            <h3>Select batch:</h3>
+            <span style="width:30%;">
+
+                <span style="display: flex;flex-direction:row">
+                    <span>
+                        <input id="batch1" type="checkbox" style="height: 15px;width: 20px;"/>
+                    </span>
+                    <label for="batch1">TLE Eliminators 1 (1₹)</label>
+                </span>
+
+                <span style="display: flex;flex-direction:row">
+                    <span>
+                        <input id="batch2" type="checkbox" style="height: 15px;width: 20px;"/>
+                    </span>
+                    <label for="batch2">TLE Eliminators 2 (1₹)</label>
+                </span>
+
+                <span style="display: flex;flex-direction:row">
+                    <span>
+                        <input id="batch3" type="checkbox" style="height: 15px;width: 20px;"/>
+                    </span>
+                    <label for="batch3">TLE Eliminators 3 (1₹)</label>
+                </span>
+
+            </span>
+
+            <button onclick="payment()">Proceed</button>
+        </div>
+    </div>
+
+</body>
+</html>
