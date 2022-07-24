@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
 import { LOGIN, LOGOUT } from "./authentication.js";
 
@@ -134,6 +134,13 @@ function sendMessage(){
     })
 }
 
+function login() {
+    LOGIN();
+}
+function logout() {
+    LOGOUT();
+}
+
 function payment(){
     const discord = document.getElementById("pay_dis").value;
     const email = document.getElementById("pay_email").value;
@@ -143,13 +150,30 @@ function payment(){
     const batch2 = document.getElementById("batch2").checked
     const batch3 = document.getElementById("batch3").checked
 
+    const courses = {
+        "tle1":batch1,
+        "tle2":batch2,
+        "tle3":batch3,
+    }
+
     if(batch1)price++;
     if(batch2)price++;
     if(batch3)price++;
 
-    console.log(discord)
-    console.log(email)
-    console.log(price)
+    if(discord==="" || email===""){
+        return
+    }
+
+    if(!email.endsWith("@gmail.com")){
+        swal("", "Please enter your gmail adress.", "error.png")
+        return
+    }
+
+    if(price == 0){
+        swal("Transaction failed", "Please select at least one level.", "error.png")
+        return;
+    }
+
     var options = {
         "key":"rzp_test_ZHpFbfhR3rcJD8",
         "amount":price * 100,
@@ -161,7 +185,15 @@ function payment(){
                 swal("Transaction failed", "Please try again.", "error.png")
             }
             else{
-                swal("Transaction successful", "", "success.png")
+                (async () => {
+                    const OBJ = {
+                        "email":email,
+                        "discord":discord,
+                        "courses":courses
+                    }
+                    await setDoc(doc(usrs, email), OBJ);
+                })();
+                swal("Transaction successfull", "Your transaction was successfull.", "success.png")
             }
         },
         "prefill": {
@@ -178,13 +210,6 @@ function payment(){
     }
     var pay = new Razorpay(options)
     pay.open()
-}
-
-function login() {
-    LOGIN();
-}
-function logout() {
-    LOGOUT();
 }
 
 function handleForm(event) { event.preventDefault(); } 
